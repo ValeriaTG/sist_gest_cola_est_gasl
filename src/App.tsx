@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Clock, Fuel, Users, Calendar, Bell, BarChart3, Settings, CheckCircle, CreditCard, MapPin, Smartphone, Shield } from 'lucide-react';
+import { Clock, Fuel, Users, Calendar, Bell, BarChart3, Settings, CheckCircle, CreditCard, MapPin, Smartphone, Shield, HelpCircle } from 'lucide-react';
 import CustomerPanel from './components/CustomerPanel';
 import AdminPanel from './components/AdminPanel';
 import PaymentPanel from './components/PaymentPanel';
 import ReservationPanel from './components/ReservationPanel';
+import HelpPanel from './components/HelpPanel';
 import Navigation from './components/Navigation';
 import LoginPanel from './components/LoginPanel';
 import NotificationSystem from './components/NotificationSystem';
 import { GasStation, QueueItem, PumpStatus, Reservation, PaymentData, User } from './types';
 
 function App() {
-  const [activeView, setActiveView] = useState<'customer' | 'admin' | 'reservations' | 'payments'>('customer');
+  const [activeView, setActiveView] = useState<'customer' | 'admin' | 'reservations' | 'payments' | 'help'>('customer');
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [showLogin, setShowLogin] = useState(false);
   
@@ -117,6 +118,14 @@ function App() {
       return;
     }
     setActiveView(view);
+  };
+
+  const handleViewChangeWithHelp = (view: 'customer' | 'admin' | 'reservations' | 'payments' | 'help') => {
+    if (view === 'help') {
+      setActiveView(view);
+      return;
+    }
+    handleViewChange(view as 'customer' | 'admin' | 'reservations' | 'payments');
   };
 
   const addToQueue = (customerName: string, fuelType: string, phoneNumber: string, email: string, priority: 'normal' | 'high' = 'normal') => {
@@ -312,7 +321,7 @@ function App() {
 
       <Navigation 
         activeView={activeView} 
-        setActiveView={handleViewChange}
+        setActiveView={handleViewChangeWithHelp}
         currentUser={currentUser}
         onLogout={handleLogout}
       />
@@ -440,6 +449,13 @@ function App() {
             gasStation={gasStation}
             onProcessPayment={processPayment}
             currentTime={currentTime}
+          />
+        )}
+        
+        {activeView === 'help' && (
+          <HelpPanel 
+            currentUser={currentUser}
+            onShowLogin={() => setShowLogin(true)}
           />
         )}
       </div>

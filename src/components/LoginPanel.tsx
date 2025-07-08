@@ -17,16 +17,20 @@ const LoginPanel: React.FC<LoginPanelProps> = ({ onLogin, onClose }) => {
     setError('');
     setIsLoading(true);
 
-    // Simular delay de autenticación
-    setTimeout(() => {
+    try {
+      // Simular delay de autenticación
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
       const success = onLogin(username, password);
       
       if (!success) {
         setError('Usuario o contraseña incorrectos');
       }
-      
+    } catch (error) {
+      setError('Error de conexión. Intenta nuevamente.');
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   return (

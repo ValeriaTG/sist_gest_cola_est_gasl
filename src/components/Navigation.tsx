@@ -1,10 +1,10 @@
 import React from 'react';
-import { Users, Settings, Calendar, CreditCard, LogOut, Shield } from 'lucide-react';
+import { Users, Settings, Calendar, CreditCard, LogOut, Shield, HelpCircle } from 'lucide-react';
 import { User } from '../types';
 
 interface NavigationProps {
-  activeView: 'customer' | 'admin' | 'reservations' | 'payments';
-  setActiveView: (view: 'customer' | 'admin' | 'reservations' | 'payments') => void;
+  activeView: 'customer' | 'admin' | 'reservations' | 'payments' | 'help';
+  setActiveView: (view: 'customer' | 'admin' | 'reservations' | 'payments' | 'help') => void;
   currentUser: User | null;
   onLogout: () => void;
 }
@@ -14,6 +14,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeView, setActiveView, curr
     { id: 'customer', label: 'Panel Cliente', icon: Users, public: true },
     { id: 'reservations', label: 'Reservas', icon: Calendar, public: true },
     { id: 'payments', label: 'Pagos', icon: CreditCard, public: true },
+    { id: 'help', label: 'Ayuda', icon: HelpCircle, public: true },
     { id: 'admin', label: 'Administración', icon: Settings, public: false },
   ];
 
