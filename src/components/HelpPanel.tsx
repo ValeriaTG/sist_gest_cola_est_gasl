@@ -17,7 +17,8 @@ import {
   AlertCircle,
   Smartphone,
   QrCode,
-  MapPin
+  MapPin,
+  BarChart3
 } from 'lucide-react';
 import { User } from '../types';
 
