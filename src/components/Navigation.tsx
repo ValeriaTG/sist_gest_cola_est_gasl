@@ -15,7 +15,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeView, setActiveView, curr
     { id: 'reservations', label: 'Reservas', icon: Calendar, public: true },
     { id: 'payments', label: 'Pagos', icon: CreditCard, public: true },
     { id: 'help', label: 'Ayuda', icon: HelpCircle, public: true },
-    { id: 'admin', label: 'Administración', icon: Settings, public: false },
+    { id: 'admin', label: 'Administración', icon: Settings, public: true },
   ];
 
   return (
@@ -25,7 +25,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeView, setActiveView, curr
           <div className="flex space-x-8 overflow-x-auto">
             {navItems.map((item) => {
               const Icon = item.icon;
-              const isAccessible = item.public || currentUser;
+              const isAccessible = true; // Permitir acceso a todos los botones
               
               return (
                 <button
@@ -42,7 +42,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeView, setActiveView, curr
                 >
                   <Icon className="w-5 h-5 mr-2" />
                   {item.label}
-                  {!item.public && !currentUser && (
+                  {item.id === 'admin' && !currentUser && (
                     <Shield className="w-4 h-4 ml-2 text-gray-400" />
                   )}
                 </button>
