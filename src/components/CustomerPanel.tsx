@@ -8,6 +8,7 @@ interface CustomerPanelProps {
   getAvailablePumps: (fuelType: string) => number;
   getWaitingCustomers: (fuelType: string) => number;
   currentTime: Date;
+  onNavigateToReservations?: () => void;
 }
 
 const CustomerPanel: React.FC<CustomerPanelProps> = ({
@@ -16,6 +17,7 @@ const CustomerPanel: React.FC<CustomerPanelProps> = ({
   getAvailablePumps,
   getWaitingCustomers,
   currentTime,
+  onNavigateToReservations,
 }) => {
   const [customerName, setCustomerName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -81,7 +83,10 @@ const CustomerPanel: React.FC<CustomerPanelProps> = ({
             <h3 className="text-lg font-semibold">Reservar</h3>
           </div>
           <p className="text-green-100 mb-4">Programa tu visita y evita las colas</p>
-          <button className="bg-white text-green-600 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+          <button 
+            onClick={onNavigateToReservations}
+            className="bg-white text-green-600 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors"
+          >
             Hacer Reserva
           </button>
         </div>

@@ -128,6 +128,10 @@ function App() {
     handleViewChange(view as 'customer' | 'admin' | 'reservations' | 'payments');
   };
 
+  // Función para cambiar vista desde componentes internos
+  const navigateToView = (view: 'customer' | 'admin' | 'reservations' | 'payments') => {
+    setActiveView(view);
+  };
   const addToQueue = (customerName: string, fuelType: string, phoneNumber: string, email: string, priority: 'normal' | 'high' = 'normal') => {
     const newQueueItem: QueueItem = {
       id: Date.now().toString(),
@@ -421,6 +425,7 @@ function App() {
             getAvailablePumps={getAvailablePumps}
             getWaitingCustomers={getWaitingCustomers}
             currentTime={currentTime}
+            onNavigateToReservations={() => setActiveView('reservations')}
           />
         )}
         
